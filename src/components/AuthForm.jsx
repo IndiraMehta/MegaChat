@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 
 const AuthForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true); // toggle between login/signup
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -12,11 +12,19 @@ const AuthForm = () => {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // it gives access to signup login, signInWithGoogle
   const { signup, login, signInWithGoogle } = useAuth();
 
+  //
   const handleSubmit = async (e) => {
+    // stops html form behavoiur that is to reload the page
+    //ensures the react app doesnt loose state on submission
     e.preventDefault();
+   //reset any existing error messages
     setError('');
+
+    //loading state to true,
+    //loading is a flag to control the UI state and prevent multiple clicks or confusion.
     setLoading(true);
 
     try {
@@ -48,8 +56,10 @@ const AuthForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <div className="w-full max-w-md">
+      {/* card has the logo,haedings,forms,buttons */}
         <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
           <div className="text-center mb-8">
+            {/* lucide react icon */}
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Mail className="w-8 h-8 text-white" />
             </div>

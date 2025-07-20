@@ -1,25 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
+
+//used to store chat records in firebase's firestore
 import { 
   collection, 
-  addDoc, 
-  query, 
+  addDoc, //add a new message document
+  query, //+orderBy to sort messages chronologically
   orderBy, 
-  onSnapshot,
-  serverTimestamp
+  onSnapshot,  //listens to realtime changes
+  serverTimestamp  //generates firebase server time
 } from 'firebase/firestore';
 import { db } from '../lib/firebase';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';  //currentUser and logout
 import { Send, LogOut, MessageCircle } from 'lucide-react';
 
 const ChatRoom = () => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const [messages, setMessages] = useState([]); //array of chat messages fetchedd from firebase
+  const [newMessage, setNewMessage] = useState(''); //checks for new messages in the input field of message
+  const [loading, setLoading] = useState(false); //to show loading when sending a message
+  const messagesEndRef = useRef(null); //to go to last messages
   const { currentUser, logout } = useAuth();
 
-  useEffect(() => {
+//I'm using onSnapshot() to listen to live changes in Firestore. Every time someone sends a message, the UI auto-updates without refreshing the page.
+// Subscribes to the messages collection in Firestore.
+// Orders by createdAt (timestamp field).
+// When any message is added/updated, onSnapshot gets triggered.
+// Updates the messages state in real time.
+// Returns unsubscribe to clean up the listener when the component unmounts.
+  
+useEffect(() => {
     const q = query(collection(db, 'messages'), orderBy('createdAt', 'asc'));
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const messagesData = [];
       snapshot.forEach((doc) => {
@@ -31,11 +41,13 @@ const ChatRoom = () => {
     return unsubscribe;
   }, []);
 
+  //Every time the messages array updates, scroll the view to the bottom.
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const sendMessage = async (e) => {
+    //Prevents blank messages or sending without being logged in.
     e.preventDefault();
     if (!newMessage.trim() || !currentUser) return;
 
@@ -46,7 +58,7 @@ const ChatRoom = () => {
         createdAt: serverTimestamp(),
         email: currentUser.email,
         displayName: currentUser.displayName || 'Anonymous',
-        photoURL: currentUser.photoURL
+
       });
       setNewMessage('');
     } catch (error) {
@@ -55,11 +67,13 @@ const ChatRoom = () => {
       setLoading(false);
     }
   };
+  //The sendMessage function uses Firestore’s addDoc() to add a new message with the current user's details. I also use serverTimestamp() so sorting works correctly for all clients.
 
   const formatTime = (timestamp) => {
     if (!timestamp) return '';
     return timestamp.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
+
 const getInitials = (name) => {
   if (!name || typeof name !== 'string') return '?';
   return name
