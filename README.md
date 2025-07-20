@@ -1,72 +1,89 @@
 <div align="center">
-<div className="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-xl flex items-center justify-center">
-              <MessageCircle className="w-6 h-6 text-white" />
-            </div>
- </div>           
-# 💬 MegaChat App — Firebase × Vite × Tailwind
-
-A blazing fast and beautiful **real-time chat app** built with **React + Vite**, powered by **Firebase Authentication** and **Cloud Firestore**. The app supports **Google Sign-In**, real-time messaging, automatic scroll, and a sleek modern UI using TailwindCSS.
+  <img src="./src/assets/logo.png" alt="MegaChat Logo" width="80" />
+  <h1>💬 MegaChat App</h1>
+  <p>A blazing-fast and beautiful real-time chat app built using <strong>React + Vite</strong>, powered by <strong>Firebase</strong>, styled with <strong>TailwindCSS</strong>.</p>
+</div>
 
 ---
 
 ## 🚀 Tech Stack
 
-### Frontend:
-- ⚛️ **React** (via Vite)
-- 🎨 **Tailwind CSS** for modern UI
-- 🔀 **React Router DOM** for page routing
-- 🔔 **React Toastify** for notifications
-- 🪄 **Framer Motion** for animations
+**Frontend**
+- ⚛️ React (with Vite)
+- 🎨 Tailwind CSS
+- 🔀 React Router DOM
+- 🔔 React Toastify
+- 🪄 Framer Motion
 
-### Firebase:
-- 🔐 **Firebase Authentication** (Google + Email/Password)
-- 💬 **Firestore** for real-time messaging
-- ☁️ **Firebase SDK v9 Modular**
+**Backend (Firebase)**
+- 🔐 Firebase Authentication (Google + Email/Password)
+- 💬 Firestore (real-time database)
+- ☁️ Firebase SDK v9 Modular
 
 ---
 
-## 📂 Project Structure
-📦 client
+## 🌟 Features
+```
+✅ Google and Email Auth (Firebase Auth)  
+✅ Real-time Messaging (Firestore)  
+✅ Auto Scroll-to-Bottom on New Messages  
+✅ Mobile Responsive UI  
+✅ Avatars using User Initials  
+✅ Toast Notifications  
+✅ Clean & Reusable Components  
+✅ Gradient Animations + Lucid UI  
+```
+
+
+---
+
+
+## 📁 Project Structure
+```
+📦 MegaChat/
 ├── 📂 public
 ├── 📂 src
-│ ├── 📂 components
-│ │ ├── ChatRoom.jsx
-│ │ ├── AuthForm.jsx
-│ ├── 📂 context
-│ │ ├── AuthContext.jsx
-│ ├── 📂 lib
-│ │ ├── firebase.js
+│ ├── 📂 assets # Images & Screenshots
+│ ├── 📂 components # UI Components (ChatRoom, AuthForm, etc.)
+│ ├── 📂 context # Auth Context using Firebase
+│ ├── 📂 lib # Firebase configuration
 │ ├── App.jsx
+│ ├── App.css
+│ ├── index.css
 │ ├── main.jsx
-| ├── index.css
-| ├── App.css
-├── 📜 .env
+├── 📜 .env # Environment Variables
 ├── 📜 .gitignore
 ├── 📜 index.html
 ├── 📜 package.json
 ├── 📜 tailwind.config.js
 ├── 📜 vite.config.js
+ ```
+
 ---
 
-## 🌟 Features
-
-✅ **Firebase Google & Email Authentication**  
-✅ **Real-Time Messaging via Firestore**  
-✅ **Auto Scroll-to-Bottom** on new messages  
-✅ **Mobile Responsive** UI  
-✅ **User Avatars from Initials**  
-✅ **Toast Notifications**  
-✅ **Clean and Componentized Codebase**
 ## 📸 Screenshots
 
----
-
-| Page | Screenshot |
-|------|-----------|
-| **Auth Page** | ![Auth Page](./src/assets/AuthPage.png)|
-| **Chat Room** | ![Chat Room](./src/assets/ChatRoom.png) |
+| Auth Page | Chat Room |
+|-----------|-----------|
+| ![Auth Page](./src/assets/AuthPage.png) | ![Chat Room](./src/assets/ChatRoom.png) |
 
 ---
+<!-- 
+ -----
+
+## 🌟 Features
+✅ Google & Email/Password Authentication
+✅ Real-Time Chat with Firestore
+✅ Auto Scroll to Bottom on New Messages
+✅ Mobile Responsive
+✅ User Initials Avatars
+✅ Toast Notifications
+✅ Component-Based Code
+✅ Smooth UI Animations
+
+--- -->
+
+
 
 # 1. Clone the repository
 git clone https://github.com/your-username/megachat.git
